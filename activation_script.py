@@ -22,14 +22,15 @@ class URLFinder(PathEntryFinder):
 import re
 import sys
 from urllib.request import urlopen
+import requests
 
 
 def url_hook(some_str):
       
     if not some_str.startswith(("http", "https")):
         raise ImportError
-    with urlopen(some_str) as page: # requests.get()
-        data = page.read().decode("utf-8")
+    with requests.get(some_str) as page: # requests.get()
+        data = page.text
     filenames = re.findall("[a-zA-Z_][a-zA-Z0-0_]*.py", data)
     modnames = {name[:-3] for name in filenames}
     return URLFinder(some_str, modnames)
@@ -56,4 +57,5 @@ class URLLoader:
 
 
 sys.path.append("http://localhost:8000")
-import myremotemodule
+#sys.path.append("https://Lab52.artemscherbinin.repl.co")
+#import myremotemodule
