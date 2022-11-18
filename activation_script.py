@@ -58,4 +58,4 @@ class URLLoader:
 
 sys.path.append("http://localhost:8000")
 #sys.path.append("https://Lab52.artemscherbinin.repl.co")
-#import myremotemodule
+import myremotemodule
